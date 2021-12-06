@@ -2,8 +2,10 @@ from django.contrib.auth.models import User
 from django.utils.html import format_html
 from django import template
 from blog.models import Post
+import logging
 
 register = template.Library()
+logger = logging.getLogger(__name__)
 
 @register.filter
 def author_details(author, current_user):
@@ -48,3 +50,4 @@ def endcol():
 def recent_posts(post):
     posts = Post.objects.exclude(pk=post.pk)[:5]
     return {"title": "Recent Posts", "posts": posts}
+    logger.debug("Loaded %d recent posts for post %d", len(posts), post.pk)
