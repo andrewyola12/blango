@@ -71,10 +71,12 @@ class Dev(Configuration):
         'blog',
         'crispy_forms',
         'crispy_bootstrap5',
+        'debug_toolbar',
     ]
 
     MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
     #     'django.middleware.csrf.CsrfViewMiddleware',
@@ -152,7 +154,7 @@ class Dev(Configuration):
 
     USE_TZ = True
 
-
+    INTERNAL_IPS = ["192.168.11.179"]
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
