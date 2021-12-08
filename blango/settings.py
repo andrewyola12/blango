@@ -80,10 +80,10 @@ class Dev(Configuration):
         'debug_toolbar.middleware.DebugToolbarMiddleware',
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
-    #     'django.middleware.csrf.CsrfViewMiddleware',
+    #   'django.middleware.csrf.CsrfViewMiddleware',
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
-    #     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #   'django.middleware.clickjacking.XFrameOptionsMiddleware',
     ]
 
     ROOT_URLCONF = 'blango.urls'
@@ -144,9 +144,9 @@ class Dev(Configuration):
     ]
     # Internationalization
     # https://docs.djangoproject.com/en/3.2/topics/i18n/
-
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
     LANGUAGE_CODE = 'en-us'
-
+    ACCOUNT_ACTIVATION_DAYS = 7
     TIME_ZONE = values.Value("UTC")
 
     USE_I18N = True
@@ -158,7 +158,7 @@ class Dev(Configuration):
     INTERNAL_IPS = ["192.168.11.179"]
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
+    
     STATIC_URL = '/static/'
 
     # Default primary key field type
@@ -168,5 +168,6 @@ class Dev(Configuration):
     CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
     CRISPY_TEMPLATE_PACK = "bootstrap5"
     AUTH_USER_MODEL = "blango_auth.User"
+    REGISTRATION_OPEN = True
 class Prod(Dev):
     DEBUG = False
