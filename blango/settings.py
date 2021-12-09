@@ -17,7 +17,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 class Dev(Configuration):
     # Build paths inside the project like this: BASE_DIR / 'subdir'.
-    BASE_DIR = Path(__file__).resolve().parent.parent
     
 
     LOGGING = {
@@ -41,6 +40,7 @@ class Dev(Configuration):
           "level": "DEBUG",
       },
     }
+    BASE_DIR = Path(__file__).resolve().parent.parent
     # Quick-start development settings - unsuitable for production
     # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -67,12 +67,17 @@ class Dev(Configuration):
         'django.contrib.contenttypes',
         'django.contrib.sessions',
         'django.contrib.messages',
+        'django.contrib.sites',
         'django.contrib.staticfiles',
         'blango_auth',
         'blog',
         'crispy_forms',
         'crispy_bootstrap5',
         'debug_toolbar',
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
+        'allauth.socialaccount.providers.google',
     ]
 
     MIDDLEWARE = [
@@ -154,7 +159,11 @@ class Dev(Configuration):
     USE_L10N = True
 
     USE_TZ = True
-
+    SITE_ID = 1
+    ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+    ACCOUNT_EMAIL_REQUIRED = True
+    ACCOUNT_USERNAME_REQUIRED = False
+    ACCOUNT_AUTHENTICATION_METHOD = "email"
     INTERNAL_IPS = ["192.168.11.179"]
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/3.2/howto/static-files/
