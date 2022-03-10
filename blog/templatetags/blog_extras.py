@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils.html import format_html
 from django import template
 from blog.models import Post
@@ -6,10 +6,11 @@ import logging
 
 register = template.Library()
 logger = logging.getLogger(__name__)
+user_model = get_user_model()
 
 @register.filter
 def author_details(author, current_user):
-    if not isinstance(author, User):
+    if not isinstance(author, user_model):
         # return empty string as safe default
         return ""
 
@@ -49,5 +50,5 @@ def endcol():
 @register.inclusion_tag("blog/post-list.html")
 def recent_posts(post):
     posts = Post.objects.exclude(pk=post.pk)[:5]
-    return {"title": "Recent Posts", "posts": posts}
     logger.debug("Loaded %d recent posts for post %d", len(posts), post.pk)
+    return {"title": "Recent Posts", "posts": posts}
